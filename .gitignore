@@ -1,0 +1,11 @@
+.ipynb_checkpoints
+
+*.pkl
+
+*.vec
+
+*.npy
+
+.DS_Store
+
+*/__pycache__/
