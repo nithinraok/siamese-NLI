@@ -2,15 +2,16 @@ import torch
 import numpy as np
 from torch.utils.data import Dataset
 import os.path as osp
+import os
 
-ROOT='/Users/nithinrao/MyFiles/MS/USC/Fall_2019/NLP-CSCI544/Project/snli/data/'
+ROOT=os.getcwd()
 
 class SNLI_dataset(Dataset):
     def __init__(self,split):
         super().__init__()
 
-        PATH1 = osp.join(ROOT,split,'contradiction.npy')
-        PATH2 = osp.join(ROOT,split,'entailment.npy')
+        PATH1 = osp.join(ROOT,'data',split,'contradiction.npy')
+        PATH2 = osp.join(ROOT,'data',split,'entailment.npy')
 
         self.contra = np.load(PATH1,mmap_mode='r')
         self.entail = np.load(PATH2,mmap_mode='r')

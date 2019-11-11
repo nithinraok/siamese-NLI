@@ -1,7 +1,7 @@
 import torch
 import os
 
-ROOT='/Users/nithinrao/MyFiles/MS/USC/Fall_2019/NLP-CSCI544/Project/snli'
+ROOT=os.getcwd()
 
 def savemodel(model,dir=''):
     ROOT_PATH=os.path.join(ROOT,'saved_models/',dir)
