@@ -5,18 +5,18 @@ class Siamese(nn.Module):
 	def __init__(self,in_dim,hid_dim,out_dim):
 		super(Siamese,self).__init__()
 		self.encoder=nn.Sequential(
-			nn.Linear(in_dim,hid_dim),
-            nn.ReLU(),
-            nn.Linear(hid_dim,hid_dim//2),
-			nn.BatchNorm1d(hid_dim//2),
-			nn.ReLU(),
-			nn.Dropout(p=0.2),
-            nn.Linear(hid_dim//2,hid_dim//3),
-			nn.BatchNorm1d(hid_dim//3),
-			nn.ReLU(),
-			nn.Dropout(p=0.2),
-			nn.Linear(hid_dim//3,out_dim)
-			)
+		nn.Linear(in_dim,hid_dim),
+		nn.ReLU(),
+		nn.Linear(hid_dim,hid_dim//2),
+		nn.BatchNorm1d(hid_dim//2),
+		nn.ReLU(),
+		nn.Dropout(p=0.2),
+		nn.Linear(hid_dim//2,hid_dim//3),
+		nn.BatchNorm1d(hid_dim//3),
+		nn.ReLU(),
+		nn.Dropout(p=0.2),
+		nn.Linear(hid_dim//3,out_dim)
+		)
 		# self.linear=nn.Linear(out_dim,1,bias=False)
 		S=torch.randn((out_dim,out_dim),requires_grad=True)
 		self.S = nn.Parameter(S,requires_grad=True)
