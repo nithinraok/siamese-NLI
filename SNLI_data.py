@@ -3,7 +3,7 @@ import numpy as np
 from torch.utils.data import Dataset
 import os.path as osp
 
-ROOT='/Users/nithinrao/MyFiles/MS/USC/Fall_2019/NLP-CSCI544/Project/snli'
+ROOT='/Users/nithinrao/MyFiles/MS/USC/Fall_2019/NLP-CSCI544/Project/snli/data/'
 
 class SNLI_dataset(Dataset):
     def __init__(self,split):
