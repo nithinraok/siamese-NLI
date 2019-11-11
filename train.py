@@ -64,7 +64,7 @@ valid_dl=DataLoader(valid_ds,batch_size=batch_size,shuffle=False,num_workers=6)
 test_ds=SNLI_dataset('test')
 test_dl=DataLoader(test_ds,batch_size=batch_size,shuffle=False,num_workers=6)
 
-device='cpu'
+device='cuda' if torch.cuda.is_available() else 'cpu'
 model = Siamese(4096,1024,32)
 optimizer=torch.optim.Adam(model.parameters(),lr=3e-4,weight_decay=0.0)
 criteria=torch.nn.BCEWithLogitsLoss()

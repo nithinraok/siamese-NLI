@@ -18,8 +18,11 @@ class Siamese(nn.Module):
 			nn.Linear(hid_dim//3,out_dim)
 			)
 		# self.linear=nn.Linear(out_dim,1,bias=False)
-		self.S=torch.randn((out_dim,out_dim),requires_grad=True)
-		self.b=torch.randn(1,requires_grad=True)
+		S=torch.randn((out_dim,out_dim),requires_grad=True)
+		self.S = nn.Parameter(S,requires_grad=True)
+
+		b=torch.randn(1,requires_grad=True)
+		self.b = nn.Parameter(b,requires_grad=True)
 
 
 	def forward(self,inp1,inp2):
