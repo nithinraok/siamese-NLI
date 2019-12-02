@@ -36,7 +36,7 @@ class SNLI_dataset(Dataset):
     
 
 
-class SNLI_TransDataset(Dataset):
+class SNLI_Transformer(Dataset):
     def __init__(self,split):
         super().__init__()
 

@@ -37,9 +37,8 @@ def fit(model,loader,criteria,optimizer,device):
         count+=1
         if count>100:
             break
-            
     
-    return tr_loss/count,tr_acc/count,count
+    return tr_loss/count,tr_acc/count
 
 def valid(model,loader,criteria,optimizer,device):
     val_loss=0
@@ -78,11 +77,11 @@ if __name__ == "__main__":
 
     device='cuda' if torch.cuda.is_available() else 'cpu'
     model = Siamese(4096,1024,32)
-    optimizer=torch.optim.Adam(model.parameters(),lr=3e-4,weight_decay=0.0)
+    optimizer=torch.optim.Adam(model.parameters(),lr=3e-4,weight_decay=0.9)
     criteria=torch.nn.BCEWithLogitsLoss()
     model.to(device)
 
-    name = "epoch_{}_batch_{}_FNN_siamese".format(n_epochs,batch_size)
+    name = "epoch_{}_batch_{}_FNN_siamese_weightDecay_0.9".format(n_epochs,batch_size)
     configure("logs/{}".format(name))
 
     id=1
@@ -90,8 +89,7 @@ if __name__ == "__main__":
     min_loss=float('Inf')
     for epoch in range(1,n_epochs+1):
         model.train()
-        tr_loss,tr_acc,c=fit(model,train_dl,criteria,optimizer,device)
-        # print("here",c)
+        tr_loss,tr_acc=fit(model,train_dl,criteria,optimizer,device)
         model.eval()
         val_loss,val_acc=valid(model,valid_dl,criteria,optimizer,device)
         test_loss,test_acc=valid(model,test_dl,criteria,optimizer,device)
