@@ -84,7 +84,7 @@ if __name__ == "__main__":
     # model = Siamese(4096,1024,32)
     model = Siamese_LSTM(768,256,batch_size=batch_size,num_layers=1,out_dim=32,device=device)
     print(model)
-    optimizer=torch.optim.Adam(model.parameters(),lr=3e-4,weight_decay=0.9)
+    optimizer=torch.optim.Adam(model.parameters(),lr=3e-4,weight_decay=0.0)
     criteria=torch.nn.BCEWithLogitsLoss()
     model.to(device)
 
@@ -100,7 +100,7 @@ if __name__ == "__main__":
         model.eval()
         val_loss,val_acc=valid(model,valid_dl,criteria,optimizer,device)
         test_loss,test_acc=valid(model,test_dl,criteria,optimizer,device)
-
+        
         log_value('Loss/train',tr_loss,epoch)
         log_value('Accuracy/train',tr_acc,epoch)
         log_value('Loss/valid',val_loss,epoch)
@@ -108,7 +108,7 @@ if __name__ == "__main__":
         log_value('Loss/test',test_loss,epoch)
         log_value('Accuracy/test',test_acc,epoch)
         if val_loss<min_loss:
-            savemodel(model,dir='siamese')
+            savemodel(model,dir='siamese',device=device)
             min_loss=val_loss
         if epoch%id==0:
-            print("tr_loss {:.3f} acc {:.3f} valid_loss {:.3f} acc {:.3f} test_loss {:.3f} acc {:.3f}".format(tr_loss,tr_acc,val_loss,val_acc,test_loss,test_acc))
+            print("epoch {} tr_loss {:.3f} acc {:.3f} valid_loss {:.3f} acc {:.3f} test_loss {:.3f} acc {:.3f}".format(epoch,tr_loss,tr_acc,val_loss,val_acc,test_loss,test_acc))

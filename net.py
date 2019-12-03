@@ -68,7 +68,7 @@ class Siamese_LSTM(nn.Module):
 	
 	def forward_once(self,x):
 		hidden = self.init_hidden()
-		self.lstm.flatten_parameters()
+		# self.lstm.flatten_parameters()
 		lstm_out, self.hidden = self.lstm(x.float(),hidden)
 		unpacked, unpacked_len = torch.nn.utils.rnn.pad_packed_sequence(lstm_out,batch_first=True)
 		out = unpacked[:,-1]
