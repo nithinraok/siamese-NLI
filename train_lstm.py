@@ -36,8 +36,8 @@ def fit(model,loader,criteria,optimizer,device):
         tr_acc += correct.type(torch.FloatTensor).mean().item()
         tr_loss += loss.item()
         count+=1
-        if count>10:
-            break
+        # if count>100:
+            # break
         if count%20==0:
             print("Batch {}/100 loss: {:.3f} acc: {:.3f} ".format(count,tr_loss/count,tr_acc/count))
     
